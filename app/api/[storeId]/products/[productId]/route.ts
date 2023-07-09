@@ -11,7 +11,7 @@ export async function GET(
       return new NextResponse("Product id is required", { status: 400 });
     }
 
-    const product = await prisma.product.findUnique({
+    const product = await prismadb.product.findUnique({
       where: {
         id: params.productId,
       },
@@ -45,7 +45,7 @@ export async function DELETE(
       return new NextResponse("Product id is required", { status: 400 });
     }
 
-    const storeByUserId = await prisma.store.findFirst({
+    const storeByUserId = await prismadb.store.findFirst({
       where: {
         id: params.storeId,
         userId,
@@ -56,7 +56,7 @@ export async function DELETE(
       return new NextResponse("Unauthorized", { status: 405 });
     }
 
-    const product = await prisma.product.delete({
+    const product = await prismadb.product.delete({
       where: {
         id: params.productId,
       },
@@ -121,7 +121,7 @@ export async function PATCH(
       return new NextResponse("Size id is required", { status: 400 });
     }
 
-    const storeByUserId = await prisma.store.findFirst({
+    const storeByUserId = await prismadb.store.findFirst({
       where: {
         id: params.storeId,
         userId,
@@ -132,7 +132,7 @@ export async function PATCH(
       return new NextResponse("Unauthorized", { status: 405 });
     }
 
-    await prisma.product.update({
+    await prismadb.product.update({
       where: {
         id: params.productId,
       },
@@ -150,7 +150,7 @@ export async function PATCH(
       },
     });
 
-    const product = await prisma.product.update({
+    const product = await prismadb.product.update({
       where: {
         id: params.productId,
       },
